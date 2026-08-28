@@ -181,7 +181,7 @@ body {
             <div class="terminal-log" id="log"></div>
 
             <div class="profile" id="profile">
-                <img src="friend.txt" alt="User">
+               <img id="friendImage" alt="User">
                 <p>USER IDENTIFIED AS "ASAD RAMZAN"</p>
             </div>
 
@@ -261,6 +261,14 @@ function nextStep() {
 
 nextStep();
 
+
+fetch("friend.txt")
+  .then(r => r.text())
+  .then(data => {
+    document.getElementById("friendImage").src =
+      "data:image/jpeg;base64," + data.replace(/\s/g, "");
+  });
+    
 </script>
 
 </body>
