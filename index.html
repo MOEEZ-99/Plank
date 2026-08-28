@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ShadowShield VPN</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #0b1020;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .box {
+        width: 90%;
+        max-width: 420px;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .logo span {
+        color: #00d084;
+    }
+
+    .status {
+        font-size: 18px;
+        color: #aaa;
+        margin: 30px 0;
+    }
+
+    .loader {
+        width: 70px;
+        height: 70px;
+        border: 6px solid #333;
+        border-top: 6px solid #00d084;
+        border-radius: 50%;
+        margin: auto;
+        animation: spin 1s linear infinite;
+    }
+
+    .terminal {
+        display: none;
+        text-align: left;
+        background: #050505;
+        padding: 20px;
+        border-radius: 10px;
+        font-family: monospace;
+        color: #00ff66;
+        line-height: 1.8;
+    }
+
+    .prank {
+        display: none;
+        text-align: center;
+        font-size: 38px;
+        font-weight: bold;
+        animation: boom 0.4s infinite alternate;
+    }
+
+    .prank small {
+        display: block;
+        font-size: 18px;
+        margin-top: 20px;
+        font-weight: normal;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes boom {
+        from {
+            transform: scale(1);
+        }
+
+        to {
+            transform: scale(1.08);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <div id="vpn">
+        <div class="logo">
+            Shadow<span>Shield</span> VPN
+        </div>
+
+        <div class="loader"></div>
+
+        <div class="status" id="status">
+            Establishing secure connection...
+        </div>
+    </div>
+
+    <div class="terminal" id="terminal">
+        > Connecting to secure server...<br>
+        > Encrypting traffic...<br>
+        > Hiding IP address...<br>
+        > Establishing tunnel...<br>
+        > Checking security...<br>
+        > ERROR: USER DETECTED 😂
+    </div>
+
+    <div class="prank" id="prank">
+        💩 YOU GOT PRANKED 💩
+        <small>
+            Congratulations.<br><br>
+            ShadowShield VPN has successfully connected you<br>
+            to absolutely fucking nothing. 😂
+        </small>
+    </div>
+
+</div>
+
+<script>
+
+setTimeout(() => {
+    document.getElementById("status").innerText =
+        "Connecting to encrypted server...";
+}, 1500);
+
+setTimeout(() => {
+    document.getElementById("status").innerText =
+        "Securing your identity...";
+}, 3000);
+
+setTimeout(() => {
+    document.getElementById("vpn").style.display = "none";
+    document.getElementById("terminal").style.display = "block";
+}, 5000);
+
+setTimeout(() => {
+    document.getElementById("terminal").style.display = "none";
+    document.getElementById("prank").style.display = "block";
+}, 8500);
+
+</script>
+
+</body>
+</html>
