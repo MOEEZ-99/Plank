@@ -4,158 +4,262 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ShadowShield VPN</title>
+<title>NEXUS VPN</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #020403;
+    color: #00ff66;
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.terminal {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #00ff66;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #030603;
+    box-shadow: 0 0 25px rgba(0,255,100,.25);
+}
+
+.top {
+    background: #0a0f0b;
+    padding: 10px 14px;
+    border-bottom: 1px solid #143d20;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.logo {
+    text-align: center;
+    font-size: clamp(24px, 8vw, 36px);
+    font-weight: bold;
+    text-shadow: 0 0 15px #00ff66;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.status {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.progress {
+    width: 100%;
+    height: 8px;
+    background: #102015;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0 25px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #00ff66;
+    box-shadow: 0 0 10px #00ff66;
+    transition: width .5s;
+}
+
+.profile {
+    display: none;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    max-width: 55vw;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #00ff66;
+    box-shadow:
+        0 0 10px #00ff66,
+        0 0 30px rgba(0,255,100,.35);
+}
+
+.profile p {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #777;
+}
+
+.terminal-log {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #00cc55;
+    min-height: 130px;
+}
+
+.final {
+    display: none;
+    text-align: center;
+}
+
+.big {
+    font-size: clamp(30px, 10vw, 48px);
+    font-weight: bold;
+    color: #ff3333;
+    text-shadow: 0 0 15px red;
+    animation: shake .15s infinite alternate;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #00ff66;
+}
+
+@keyframes shake {
+    from { transform: translateX(-2px); }
+    to { transform: translateX(2px); }
+}
+
+@media (max-width: 380px) {
+    .content {
+        padding: 15px;
     }
 
-    body {
-        margin: 0;
-        height: 100vh;
-        background: #0b1020;
-        color: white;
-        font-family: Arial, sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+    .profile img {
+        width: 125px;
+        height: 125px;
     }
-
-    .box {
-        width: 90%;
-        max-width: 420px;
-        text-align: center;
-    }
-
-    .logo {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .logo span {
-        color: #00d084;
-    }
-
-    .status {
-        font-size: 18px;
-        color: #aaa;
-        margin: 30px 0;
-    }
-
-    .loader {
-        width: 70px;
-        height: 70px;
-        border: 6px solid #333;
-        border-top: 6px solid #00d084;
-        border-radius: 50%;
-        margin: auto;
-        animation: spin 1s linear infinite;
-    }
-
-    .terminal {
-        display: none;
-        text-align: left;
-        background: #050505;
-        padding: 20px;
-        border-radius: 10px;
-        font-family: monospace;
-        color: #00ff66;
-        line-height: 1.8;
-    }
-
-    .prank {
-        display: none;
-        text-align: center;
-        font-size: 38px;
-        font-weight: bold;
-        animation: boom 0.4s infinite alternate;
-    }
-
-    .prank small {
-        display: block;
-        font-size: 18px;
-        margin-top: 20px;
-        font-weight: normal;
-    }
-
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes boom {
-        from {
-            transform: scale(1);
-        }
-
-        to {
-            transform: scale(1.08);
-        }
-    }
+}
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="terminal">
 
-    <div id="vpn">
-        <div class="logo">
-            Shadow<span>Shield</span> VPN
+    <div class="top">
+        root@nexus-vpn:~$ secure_connection
+    </div>
+
+    <div class="content">
+
+        <div id="main">
+
+            <div class="logo">ASAD VPN</div>
+
+            <div class="subtitle">
+                MILITARY-GRADE SECURE TUNNEL
+            </div>
+
+            <div class="status" id="status">
+                [*] Initializing VPN...
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="bar"></div>
+            </div>
+
+            <div class="terminal-log" id="log"></div>
+
+            <div class="profile" id="profile">
+                <img src="friend.jpg" alt="User">
+                <p>USER IDENTIFIED AS "ASAD RAMZAN"</p>
+            </div>
+
         </div>
 
-        <div class="loader"></div>
+        <div class="final" id="final">
 
-        <div class="status" id="status">
-            Establishing secure connection...
+            <div class="big">
+                💀 GOTCHA 💀
+            </div>
+
+            <div class="message">
+                CONNECTION SUCCESSFUL.<br><br>
+
+                VPN STATUS: ❌ ABSOLUTELY FUCKED<br>
+                SECURITY LEVEL: 0%<br><br>
+
+                FUCK YOU ASAD
+            </div>
+
         </div>
-    </div>
 
-    <div class="terminal" id="terminal">
-        > Connecting to secure server...<br>
-        > Encrypting traffic...<br>
-        > Hiding IP address...<br>
-        > Establishing tunnel...<br>
-        > Checking security...<br>
-        > ERROR: USER DETECTED 😂
     </div>
-
-    <div class="prank" id="prank">
-        💩 YOU GOT PRANKED 💩
-        <small>
-            Congratulations.<br><br>
-            ShadowShield VPN has successfully connected you<br>
-            to absolutely fucking nothing. 😂
-        </small>
-    </div>
-
 </div>
 
 <script>
 
-setTimeout(() => {
-    document.getElementById("status").innerText =
-        "Connecting to encrypted server...";
-}, 1500);
+const status = document.getElementById("status");
+const bar = document.getElementById("bar");
+const log = document.getElementById("log");
+const profile = document.getElementById("profile");
 
-setTimeout(() => {
-    document.getElementById("status").innerText =
-        "Securing your identity...";
-}, 3000);
+const messages = [
+    "Connecting to encrypted server...",
+    "Generating secure tunnel...",
+    "Encrypting network traffic...",
+    "Masking IP address...",
+    "Scanning connected user...",
+    "Analyzing target...",
+    "USER IDENTIFIED."
+];
 
-setTimeout(() => {
-    document.getElementById("vpn").style.display = "none";
-    document.getElementById("terminal").style.display = "block";
-}, 5000);
+let progress = 0;
+let i = 0;
 
-setTimeout(() => {
-    document.getElementById("terminal").style.display = "none";
-    document.getElementById("prank").style.display = "block";
-}, 8500);
+function nextStep() {
+
+    if (i < messages.length) {
+
+        log.innerHTML +=
+            "> " + messages[i] + "<br>";
+
+        status.innerText =
+            "[+] " + messages[i];
+
+        progress += 14;
+        bar.style.width = progress + "%";
+
+        if (i === 6) {
+            profile.style.display = "block";
+        }
+
+        i++;
+
+        setTimeout(nextStep, 1100);
+
+    } else {
+
+        setTimeout(() => {
+
+            document.getElementById("main").style.display = "none";
+            document.getElementById("final").style.display = "block";
+
+        }, 1800);
+    }
+}
+
+nextStep();
 
 </script>
 
